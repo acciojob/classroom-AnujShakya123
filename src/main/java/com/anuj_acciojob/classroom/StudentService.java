@@ -2,7 +2,7 @@ package com.anuj_acciojob.classroom;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentServices {
+public class StudentService {
     StudentRepository studentRepository=new StudentRepository();
     public void addStudent(Student student) {
         studentRepository.addStudent(student);
