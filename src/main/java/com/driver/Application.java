@@ -1,15 +1,13 @@
-package com.driver;
+package com.anuj_acciojob.classroom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
-public class Application {
+public class ClassroomApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-
+		SpringApplication.run(ClassroomApplication.class, args);
 	}
+
 }

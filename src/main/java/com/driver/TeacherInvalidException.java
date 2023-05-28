@@ -1,4 +1,7 @@
-package com.driver;
+package com.anuj_acciojob.classroom;
 
-public class TeacherInvalidException extends RuntimeException{
+public class TeacherNotFoundException  extends RuntimeException {
+    public TeacherNotFoundException(){
+        super("Teacher data not present in the map");
+    }
 }

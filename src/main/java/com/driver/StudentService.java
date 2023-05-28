@@ -1,62 +1,66 @@
-package com.driver;
-
+package com.anuj_acciojob.classroom;
 import java.util.List;
 import java.util.Optional;
 
 public class StudentService {
     StudentRepository studentRepository=new StudentRepository();
     public void addStudent(Student student) {
-        studentRepository.add(student);
+        studentRepository.addStudent(student);
     }
 
     public void addTeacher(Teacher teacher) {
-        studentRepository.add(teacher);
+        studentRepository.addTeacher(teacher);
     }
 
-    public void addStudentTeacherPair(String student, String teacher)throws StudentNameInvalidException,RuntimeException {
-        Optional<Student> studentOpt=studentRepository.getStudent(student);
-        Optional<Teacher> teacherOpt=studentRepository.getTeacher(teacher);
-        if(studentOpt.isEmpty()){
-            throw new StudentNameInvalidException(student);
+    public void addStudentTeacherPair(String student, String teacher) {
+        Optional<Student>StudentOpt=studentRepository.getStudent(student);
+        Optional<Teacher>TeacherOpt=studentRepository.getTeacher(teacher);
+        if(TeacherOpt.isEmpty()){
+            throw new TeacherNotFoundException();
         }
-        if(teacherOpt.isEmpty()){
-            throw new TeacherInvalidException();
+        if(StudentOpt.isEmpty()){
+            throw  new StudentNotFoundException();
         }
-        Teacher teacherObj=teacherOpt.get();
-        teacherObj.setNumberOfStudents(teacherObj.getNumberOfStudents()+1);
-        studentRepository.add(student,teacher);
+        studentRepository.addStudentTeacherPair(student,teacher);
     }
 
-    public Student getStudent(String name) throws StudentNameInvalidException{
-        Optional<Student> studentOpt=studentRepository.getStudent(name);
-        if(studentOpt.isPresent()){
-            return studentOpt.get();
+    public Student getStudentbyName(String name) {
+        Optional<Student> studentOptional =studentRepository.getStudentByName(name);
+        if(studentOptional.isEmpty()){
+            throw new StudentNotFoundException();
         }
-        throw new StudentNameInvalidException(name);
+        return studentOptional.get();
     }
 
     public Teacher getTeacherByName(String name) {
-        return studentRepository.getTeacherByName(name);
+        Optional<Teacher> teacherOptional =studentRepository.getTeacherByName(name);
+        if(teacherOptional.isEmpty()){
+            throw new TeacherNotFoundException();
+        }
+        return teacherOptional.get();
     }
 
-    public List<String> getStudentsByTeacherName(String teacher) {
-        return studentRepository.getStudentsByTeacher(teacher);
+    public List<String> getStudentbyTeacherName(String teacher) {
+        List<String> list=studentRepository.getStudentByTeacherName(teacher);
+        return list;
     }
 
     public List<String> getAllStudents() {
         return studentRepository.getAllStudents();
     }
 
-    public void deleteTeacher(String teacher) {
-        List<String> students=getStudentsByTeacherName(teacher);
-        studentRepository.deleteTeacher(teacher);
-        for(String stud:students){
-            studentRepository.deleteStudent(stud);
+    public void deleteTeacherByName(String teacher) {
+        List<String> studentslist=studentRepository.getStudentsList(teacher);
+        studentRepository.remove(teacher);
+        for(String student:studentslist){
+            studentRepository.deleteStudent(student);
         }
     }
 
     public void deleteAllTeachers() {
-        List<String> teachers=studentRepository.getAllTeachers();
+        List<String> TeachersList=studentRepository.getAllTeacher();
+        for(String TeacherName:TeachersList){
+            deleteTeacherByName(TeacherName);
+        }
     }
 }
-

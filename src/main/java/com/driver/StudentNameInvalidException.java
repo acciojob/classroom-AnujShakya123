@@ -1,8 +1,7 @@
-package com.driver;
+package com.anuj_acciojob.classroom;
 
-public class StudentNameInvalidException extends RuntimeException {
-    public StudentNameInvalidException(String student) {
-        super("Invalid student name: " + student);
+public class StudentNotFoundException extends RuntimeException {
+    public StudentNotFoundException() {
+        super("Student data not found in the map");
     }
 }
-

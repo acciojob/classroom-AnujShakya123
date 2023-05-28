@@ -1,10 +1,10 @@
-package com.driver;
+package com.anuj_acciojob.classroom;
+import lombok.Getter;
+import lombok.Setter;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-
-@l
+@Getter
+@Setter
 public class Teacher {
-
     private String name;
 
     private int numberOfStudents;
@@ -14,6 +14,7 @@ public class Teacher {
     public Teacher() {
 
     }
+
     public Teacher(String name, int numberOfStudents, int age) {
         this.name = name;
         this.numberOfStudents = numberOfStudents;
