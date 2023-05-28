@@ -35,9 +35,9 @@ public class StudentController {
         try {
             studentService.addStudentTeacherPair(student, teacher);
             return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
-        }catch (StudentNotFoundException ex){
+        }catch (StudentNameInvalidException ex){
             return new ResponseEntity<>("Invalid  student name"+student,HttpStatus.NOT_FOUND);
-        }catch(TeacherNotFoundException ex){
+        }catch(TeacherInvalidException ex){
             return new ResponseEntity<>("Invalid teacher name"+teacher,HttpStatus.NOT_FOUND);
         }catch (RuntimeException ex){
             return new ResponseEntity<>("other exception",HttpStatus.NOT_FOUND);
@@ -49,7 +49,7 @@ public class StudentController {
         try{
             Student student = studentService.getStudentbyName(name); // Assign student by calling service layer method
             return new ResponseEntity<>(student, HttpStatus.CREATED);
-        }catch (StudentNotFoundException ex){
+        }catch (StudentNameInvalidException ex){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
@@ -60,7 +60,7 @@ public class StudentController {
         try {
             Teacher teacher = studentService.getTeacherByName(name);// Assign student by calling service layer method
             return new ResponseEntity<>(teacher, HttpStatus.CREATED);
-        }catch (TeacherNotFoundException ex){
+        }catch (TeacherInvalidException ex){
             return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
 
